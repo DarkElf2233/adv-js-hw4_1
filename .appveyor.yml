@@ -1,12 +1,33 @@
-image: Ubuntu1804
-stack: node 12
-branches:
-  only:
-    - master
-    - main
-cache: node_modules
-install: 
-  - npm install 
-build: off
-test_script: 
+# image: Ubuntu1804
+# stack: node 18
+# branches:
+#   only:
+#     - master
+#     - main
+# cache: node_modules
+# install:
+#   - npm install
+# build: off
+# test_script: 
+#   - npm test
+
+# Node.js version
+environment:
+  nodejs_version: "18"
+
+# Install scripts
+install:
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install
+
+# Post-install scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
   - npm test
+
+build: off
